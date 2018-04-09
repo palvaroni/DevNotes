@@ -19,3 +19,8 @@ Windows:
 ```bash
   docker exec CONTAINER /usr/bin/mysqldump -u root --password=root -r DATABASE | Set-Content backup.sql
 ```
+
+Copy files to host:
+```bash
+  docker cp CONTAINER:/path/in/container /host/path
+```
