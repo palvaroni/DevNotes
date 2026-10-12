@@ -1,3 +1,8 @@
+Base64 encode Bash input:
+```bash
+read -p "input: " input && echo -n "$input" |base64
+```
+
 Launch bar to bottom:
 ```bash
 gsettings set com.canonical.Unity.Launcher launcher-position Bottom
