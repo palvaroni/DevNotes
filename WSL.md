@@ -1,3 +1,5 @@
+# WSL development snippets
+
 Issues with connecting WSL server from host – check localhost binding:
 ```
 # /etc/hosts on WSL 2
@@ -13,4 +15,22 @@ fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
+```
+
+## Use host ADB in WSL2
+
+> NOTE: Requires the same ADB version installed on both the host Windows and WSL distro.
+
+Run ADB server on host (Windows):
+```
+adb -a nodaemon server start
+```
+Allow connection with a firewall rule (run as admin):
+```powershell
+New-NetFirewallRule -DisplayName "WSL ADB" -Direction Inbound -LocalPort 5037 -Protocol TCP -Action Allow
+```
+Connect from WSL (add to .bashrc to make persistent):
+```
+export WINDOWS_IP=$(ip route show default | awk '{print $3}')
+export ADB_SERVER_SOCKET=tcp:$WINDOWS_IP:5037
 ```
